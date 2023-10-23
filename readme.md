@@ -26,13 +26,13 @@ I'll be regularly updating this repository with my solutions to a wide range of 
 hackerrank-practice
 ├── challenge-1-name
 │   ├── solution.go
-│   ├── problems.md
+│   ├── readme.md
 ├── challenge-2-name
 │   ├── solution.go
-│   ├── problems.md
+│   ├── readme.md
 ├── challenge-3-name
 │   ├── solution.go
-│   ├── problems.md
+│   ├── readme.md
 ├── ...
 └── .gitignore
 ```
