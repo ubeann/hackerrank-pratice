@@ -27,8 +27,8 @@ func main() {
 }
 
 func zigZagSequence(sequence []int, n int) {
-	// NOTE: This solution is based on the solution to the Longest Increasing Subsequence problem
-	// The time complexity of this solution is O(n^2) because we are looping through the array twice
+	// NOTE: This is an implementation of the zig-zag sequence algorithm, which has a time complexity of O(n)
+	// Therefore, the overall time complexity of this solution is O(n^2) due to the insertion sort algorithm.
 
 	// If sequence is empty or has only one element, return sequence
 	if n <= 1 {
@@ -67,6 +67,8 @@ func zigZagSequence(sequence []int, n int) {
 }
 
 func sort(sequence []int, n int) []int {
+	// NOTE: This is an implementation of insertion sort, which has a time complexity of O(n^2)
+
 	// Iterate over sequence
 	for i := 1; i < n; i++ {
 		// Get current element
