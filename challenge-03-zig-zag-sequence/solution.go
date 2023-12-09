@@ -1,32 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"io"
+	"os"
+	"strconv"
+	"strings"
+)
 
-func main() {
-	//Enter your code here. Read input from STDIN. Print output to STDOUT
-
-	// Get number of test cases
-	var t int
-	fmt.Scanf("%d", &t)
-
-	// Iterate over test cases
-	for i := 0; i < t; i++ {
-		// Get number of elements in sequence
-		var n int
-		fmt.Scanf("%d", &n)
-
-		// Get sequence
-		var sequence = make([]int, n)
-		for j := 0; j < n; j++ {
-			fmt.Scanf("%d", &sequence[j])
-		}
-
-		// Run zig-zag sequence
-		zigZagSequence(sequence, n)
-	}
-}
-
-func zigZagSequence(sequence []int, n int) {
+/*
+ * Complete the 'zigZagSequence' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts following parameters:
+ *  1. INTEGER_ARRAY sequence
+ *  2. INTEGER n (length of sequence)
+ */
+func zigZagSequence(sequence []int, n int) []int {
 	// NOTE: This is an implementation of the zig-zag sequence algorithm, which has a time complexity of O(n)
 	// Therefore, the overall time complexity of this solution is O(n^2) due to the insertion sort algorithm.
 
@@ -56,14 +47,8 @@ func zigZagSequence(sequence []int, n int) {
 		right--
 	}
 
-	// Iterate over sequence and print elements
-	for i := 0; i < n; i++ {
-		if i == n-1 {
-			fmt.Printf("%d\n", result[i])
-		} else {
-			fmt.Printf("%d ", result[i])
-		}
-	}
+	// Return zig-zag sequence
+	return result
 }
 
 func sort(sequence []int, n int) []int {
@@ -89,4 +74,67 @@ func sort(sequence []int, n int) []int {
 
 	// Return sorted sequence
 	return sequence
+}
+
+func main() {
+	// Enter your code here. Read input from STDIN. Print output to STDOUT
+
+	reader := bufio.NewReaderSize(os.Stdin, 16*1024*1024)
+
+	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
+	checkError(err)
+
+	defer stdout.Close()
+
+	writer := bufio.NewWriterSize(stdout, 16*1024*1024)
+
+	tTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
+	checkError(err)
+	t := int32(tTemp)
+
+	for tItr := 0; tItr < int(t); tItr++ {
+		nTemp, err := strconv.ParseInt(strings.TrimSpace(readLine(reader)), 10, 64)
+		checkError(err)
+		n := int(nTemp)
+
+		sequenceTemp := strings.Split(strings.TrimSpace(readLine(reader)), " ")
+
+		var sequence []int
+
+		for i := 0; i < int(n); i++ {
+			sequenceItemTemp, err := strconv.ParseInt(sequenceTemp[i], 10, 64)
+			checkError(err)
+			sequenceItem := int(sequenceItemTemp)
+			sequence = append(sequence, sequenceItem)
+		}
+
+		result := zigZagSequence(sequence, n)
+
+		for i, resultItem := range result {
+			fmt.Fprintf(writer, "%d", resultItem)
+
+			if i != len(result)-1 {
+				fmt.Fprintf(writer, " ")
+			} else {
+				fmt.Fprintf(writer, "\n")
+			}
+		}
+	}
+
+	writer.Flush()
+}
+
+func readLine(reader *bufio.Reader) string {
+	str, _, err := reader.ReadLine()
+	if err == io.EOF {
+		return ""
+	}
+
+	return strings.TrimRight(string(str), "\r\n")
+}
+
+func checkError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
