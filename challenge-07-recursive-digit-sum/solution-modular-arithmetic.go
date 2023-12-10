@@ -20,13 +20,13 @@ import (
 
 func superDigit(n string, k int32) int32 {
 	// NOTE: This solution is based on the modular arithmetic property: (a + b) mod n = ((a mod n) + (b mod n)) mod n
-	//	     For example:
-	// 		 (123 + 456) mod 9 = ((1 + 2 + 3) + (4 + 5 + 6)) mod 9
-	//			   (579) mod 9 = ((6) + (15)) mod 9
-	//				   		 3 = 3
-	// 	     We can use recursive to calculate the digit sum, but it will cause stack overflow for large input
-	// 	     So, we use iterative instead. The idea is to calculate the digit sum using modular arithmetic
-	// 	     The time complexity is O(n), where n is the length of string n
+	//       For example:
+	//       (123 + 456) mod 9 = ((1 + 2 + 3) + (4 + 5 + 6)) mod 9
+	//             (579) mod 9 = ((6) + (15)) mod 9
+	//                       3 = 3
+	//       We can use recursive to calculate the digit sum, but it will cause stack overflow for large input
+	//       So, we use iterative instead. The idea is to calculate the digit sum using modular arithmetic
+	//       The time complexity is O(n), where n is the length of string n
 
 	// Calculate the digit sum using modular arithmetic
 	digitSum := int32(0)
